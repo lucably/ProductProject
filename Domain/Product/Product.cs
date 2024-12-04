@@ -8,6 +8,9 @@ public class Product : Entity
     public bool HasStock { get; set; }
 
     //Alegando que CategoryId é obrigatório
-    public int CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
+
+    //Valor default = true;
+    public bool Active { get; set; } = true;
 
 }
