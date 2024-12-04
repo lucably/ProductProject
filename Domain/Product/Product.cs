@@ -7,4 +7,7 @@ public class Product : Entity
     public Category Category { get; set; }
     public bool HasStock { get; set; }
 
+    //Alegando que CategoryId é obrigatório
+    public int CategoryId { get; set; }
+
 }
