@@ -20,9 +20,20 @@ public class CategoryPut
         {
             return Results.NotFound();
         }
+        /*
+            Como eu coloquei no metodo set dentro do category => private set; 
+            Eu nao consigo setar(mudar) a variavel sem ser dentro da Class Category, portanto, o codigo como estava antes nao irá funcionar:
+            
+            category.Name = categoryRequest.Name;
+            category.Active = categoryRequest.Active;
 
-        category.Name = categoryRequest.Name;
-        category.Active = categoryRequest.Active;
+            tendo que setar agora baseado no metodo criado dentro da class "EditInfo"
+         */
+
+        category.EditInfo(categoryRequest.Name, categoryRequest.Active);
+
+        if (!category.IsValid) return Results.ValidationProblem(category.Notifications.ConvertToProblemDetails());
+       
         context.SaveChanges();
 
         return Results.Ok();
