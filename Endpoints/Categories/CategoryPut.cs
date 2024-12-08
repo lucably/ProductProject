@@ -7,7 +7,8 @@ namespace ProductProject.Endpoints.Categories;
 public class CategoryPut
 {
     // a seta "=>" significa que ao criar ja atribui o valor a variavel template.
-    public static string Template => "/categories/{id}";
+    // Colocando na rota {id:guid} esse ":guid" informa que só sera aceito se o ID passado for guid, caso contrario, retornara um 404 NOT FOUND
+    public static string Template => "/categories/{id:guid}";
     public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
     public static Delegate Handle => Action;
 

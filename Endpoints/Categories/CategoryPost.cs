@@ -12,10 +12,17 @@ public class CategoryPost
 
     public static IResult Action(CategoryRequest categoryRequest, ApplicationDbContext context)
     {
-        var category = new Category(categoryRequest.Name, "Lucas", "No one");
+        var category = new Category(categoryRequest.Name, "Lucas", "No one", categoryRequest.Active);
 
         //IsValid veio herdado da Classe Entity do Notifiable
-        if (!category.IsValid) return Results.BadRequest(category.Notifications);
+        if (!category.IsValid) 
+        {
+            var erros = category.Notifications
+                .GroupBy(g => g.Key)
+                .ToDictionary(g => g.Key, g => g.Select(x => x.Message).ToArray());
+
+            return Results.ValidationProblem(erros);
+        }
 
         context.Categories.Add(category);
         context.SaveChanges();
