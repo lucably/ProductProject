@@ -1,7 +1,10 @@
-﻿namespace ProductProject.Domain;
+﻿using Flunt.Notifications;
+
+namespace ProductProject.Domain;
 
 // classe abstract => Ela nao pode ser instanciada somente herdada
-public abstract class Entity
+//  Notifiable<Notification> => Pacote FLUNT serve para validação de campos
+public abstract class Entity : Notifiable<Notification>
 {
 
     //Construtor para já gerar um novo ID;
