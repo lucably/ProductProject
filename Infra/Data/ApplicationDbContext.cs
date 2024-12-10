@@ -1,10 +1,13 @@
 ﻿using Flunt.Notifications;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProductProject.Domain.Product;
 
 namespace ProductProject.Infra.Data;
 
-public class ApplicationDbContext : DbContext
+//Ate o modulo 13 utilizamos o "DbContext" agora utilizaremos o IdentityDbContext
+public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
@@ -13,6 +16,10 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Quando damos um "base." estamos chamando a classe pai que no caso é a IdentityDbContext
+        // A classe pai IdentityDbContext esta sendo modela dentro do filho ApplicationDbContext 
+        base.OnModelCreating(modelBuilder);
+
         /*
             Foi preciso fazer isso pois quando fizemos o Entity herdar o Notification, o Entity passou a ser obrigado a declarar as variaveis do Notification
             Porem nao queremos isso, simplesmente queremos usar a validação, sem ter esse Ignore o codigo da erro 500 retornando o erro:

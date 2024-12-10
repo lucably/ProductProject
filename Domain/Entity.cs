@@ -2,8 +2,9 @@
 
 namespace ProductProject.Domain;
 
-// classe abstract => Ela nao pode ser instanciada somente herdada
-//  Notifiable<Notification> => Pacote FLUNT serve para validação de campos
+// Classe abstract => Ela nao pode ser instanciada somente herdada
+// Notifiable<Notification> => Pacote FLUNT serve para validação de campos
+// Classe que possui atributos iguais para evitar repetição de propriedades.
 public abstract class Entity : Notifiable<Notification>
 {
 
